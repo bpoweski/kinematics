@@ -12,7 +12,7 @@
     record-max-buffered-time (.setRecordMaxBufferedTime record-max-buffered-time)))
 
 (defn create [opts]
-  (KinesisProducer. (config (opts))))
+  (KinesisProducer. (config opts)))
 
 (defn put-string [^KinesisProducer producer ^String stream ^String partition-key ^String x & {:keys [encoding] :as ops :or {encoding "UTF-8"}}]
   (.addUserRecord producer stream partition-key (ByteBuffer/wrap (.getBytes x encoding))))

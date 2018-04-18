@@ -1,4 +1,4 @@
-(defproject kinematics "0.1.0"
+(defproject kinematics "0.1.1"
   :description "AWS Kinesis Consumer & Producer"
   :url "http://github.com/bpoweski/kinematics"
   :license {:name "Eclipse Public License"
