@@ -9,9 +9,14 @@
   ([ip-address]
    (str ip-address ":" (java.util.UUID/randomUUID))))
 
-(defn config [app-name stream {:keys [credential-provider id] :as opts :or {credential-provider (com.amazonaws.auth.DefaultAWSCredentialsProviderChain.) id (worker-id)}}]
-  (let [{:keys [failover-time-millis region]} opts]
-    (cond-> (KinesisClientLibConfiguration. app-name stream credential-provider id)
+(defn config [app-name stream {:keys [kinesis-credential-provider dynamodb-credential-provider cloudwatch-credential-provider credential-provider id] :as opts}]
+  (let [{:keys [failover-time-millis region]} opts
+        id                                    (or id (worker-id))
+        credential-provider                   (or credential-provider (com.amazonaws.auth.DefaultAWSCredentialsProviderChain.))
+        kinesis-credential-provider           (or kinesis-credential-provider credential-provider)
+        dynamodb-credential-provider          (or dynamodb-credential-provider credential-provider)
+        cloudwatch-credential-provider        (or cloudwatch-credential-provider credential-provider)]
+    (cond-> (KinesisClientLibConfiguration. app-name stream kinesis-credential-provider dynamodb-credential-provider cloudwatch-credential-provider id)
       (number? failover-time-millis) (.withFailoverTimeMillis (long failover-time-millis))
       (or (string? region) (keyword? region)) (.withRegionName (name region)))))
 
