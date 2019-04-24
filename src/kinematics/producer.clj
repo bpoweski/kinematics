@@ -3,13 +3,16 @@
            [java.nio ByteBuffer]))
 
 
-(defn ^KinesisProducerConfiguration config [{:keys [credentials-provider region max-connections request-timeout record-max-buffered-time]}]
+(defn ^KinesisProducerConfiguration config [{:keys [credentials-provider region max-connections request-timeout record-max-buffered-time kinesis-endpoint kinesis-port set-verify-certificate]}]
   (cond-> (KinesisProducerConfiguration.)
     credentials-provider     (.setCredentialsProvider credentials-provider)
     region                   (.setRegion (name region))
     max-connections          (.setMaxConnections max-connections)
     request-timeout          (.setRequestTimeout request-timeout)
-    record-max-buffered-time (.setRecordMaxBufferedTime record-max-buffered-time)))
+    record-max-buffered-time (.setRecordMaxBufferedTime record-max-buffered-time)
+    kinesis-endpoint         (.setKinesisEndpoint kinesis-endpoint)
+    kinesis-port             (.setKinesisPort kinesis-port)
+    set-verify-certificate   (.setVerifyCertificate set-verify-certificate)))
 
 (defn create [opts]
   (KinesisProducer. (config opts)))
