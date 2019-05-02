@@ -8,4 +8,5 @@
   (is (= (.getRegion (pro/config {:region :us-east-1 })) "us-east-1"))
   (is (= (.getRegion (pro/config {:region "us-east-1"})) "us-east-1"))
   (is (false? (.isAggregationEnabled (pro/config {:aggregation-enabled false}))))
-  (is (true? (.isAggregationEnabled (pro/config {:aggregation-enabled true})))))
+  (is (true? (.isAggregationEnabled (pro/config {:aggregation-enabled true}))))
+  (is (= 100 (.getCredentialsRefreshDelay (pro/config {:credentials-refresh-delay 100})))))
