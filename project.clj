@@ -9,5 +9,5 @@
                  [com.amazonaws/aws-java-sdk-cloudwatch "1.11.308"]
                  [com.amazonaws/aws-java-sdk-kinesis "1.11.308"]
                  [com.amazonaws/amazon-kinesis-client "1.9.0" :exclusions [aws-java-sdk]]
-                 [com.amazonaws/amazon-kinesis-producer "0.12.7"] ;; 0.12.8 has a spin lock bug, 0.12.9 not pushed to mvn
+                 [com.amazonaws/amazon-kinesis-producer "0.12.9"] ;; 0.12.8 has a spin lock bug, 0.12.9 not pushed to mvn
                  [org.clojure/tools.logging "0.5.0-alpha"]])
