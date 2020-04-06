@@ -5,13 +5,15 @@
 
 (defn ^KinesisProducerConfiguration config
   [{:keys [credentials-provider region max-connections request-timeout record-max-buffered-time kinesis-endpoint kinesis-port set-verify-certificate
-           aggregation-enabled credentials-refresh-delay]}]
+           aggregation-enabled credentials-refresh-delay metrics-granularity metrics-level]}]
   (cond-> (KinesisProducerConfiguration.)
     credentials-provider                (.setCredentialsProvider credentials-provider)
     region                              (.setRegion (name region))
     max-connections                     (.setMaxConnections max-connections)
     request-timeout                     (.setRequestTimeout request-timeout)
     record-max-buffered-time            (.setRecordMaxBufferedTime record-max-buffered-time)
+    metrics-granularity                 (.setMetricsGranularity metrics-granularity)
+    metrics-level                       (.setMetricsLevel metrics-level)
     kinesis-endpoint                    (.setKinesisEndpoint kinesis-endpoint)
     kinesis-port                        (.setKinesisPort kinesis-port)
     set-verify-certificate              (.setVerifyCertificate set-verify-certificate)
